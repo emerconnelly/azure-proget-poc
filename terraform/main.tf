@@ -9,7 +9,7 @@ resource "azurerm_storage_account" "proget_packages" {
 
   resource_group_name      = "azure-proget-poc"
   location                 = "centralus"
-  account_kind             = "BlobStorage"
+  account_kind             = "StorageV2"
   account_tier             = "Standard"
   account_replication_type = "LRS"
   access_tier              = "Cool"
