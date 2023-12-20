@@ -32,26 +32,26 @@ resource "azurerm_storage_container" "this" {
   container_access_type = "private"
 }
 
-# resource "azurerm_virtual_network" "this" {
-#   name                = "azure-proget-poc-vnet"
-#   resource_group_name = resource.azurerm_resource_group.this.name
-#   location            = "centralus"
-#   address_space       = ["10.0.0.0/16"]
-# }
+resource "azurerm_virtual_network" "this" {
+  name                = "azure-proget-poc-vnet"
+  resource_group_name = resource.azurerm_resource_group.this.name
+  location            = "centralus"
+  address_space       = ["10.0.0.0/16"]
+}
 
-# resource "azurerm_subnet" "aks_nodes" {
-#   name                 = "aks"
-#   resource_group_name  = resource.azurerm_resource_group.this.name
-#   virtual_network_name = resource.azurerm_virtual_network.this.name
-#   address_prefixes     = ["10.0.0.0/24"]
-# }
+resource "azurerm_subnet" "aks_nodes" {
+  name                 = "aks"
+  resource_group_name  = resource.azurerm_resource_group.this.name
+  virtual_network_name = resource.azurerm_virtual_network.this.name
+  address_prefixes     = ["10.0.0.0/24"]
+}
 
-# resource "azurerm_subnet" "app_gateway" {
-#   name                 = "app-gateway"
-#   resource_group_name  = resource.azurerm_resource_group.this.name
-#   virtual_network_name = resource.azurerm_virtual_network.this.name
-#   address_prefixes     = ["10.0.1.0/24"]
-# }
+resource "azurerm_subnet" "app_gateway" {
+  name                 = "app-gateway"
+  resource_group_name  = resource.azurerm_resource_group.this.name
+  virtual_network_name = resource.azurerm_virtual_network.this.name
+  address_prefixes     = ["10.0.1.0/24"]
+}
 
 # resource "azurerm_kubernetes_cluster" "aks" {
 #   name                = "aks"
