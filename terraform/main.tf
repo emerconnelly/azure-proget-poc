@@ -18,8 +18,6 @@ resource "azurerm_storage_account" "this" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
   access_tier              = "Cool"
-
-  depends_on = [resource.azurerm_resource_group.this]
 }
 
 resource "azurerm_storage_container" "this" {
@@ -32,8 +30,6 @@ resource "azurerm_storage_container" "this" {
 
   storage_account_name  = resource.azurerm_storage_account.this.name
   container_access_type = "private"
-
-  depends_on = [resource.azurerm_storage_account.this]
 }
 
 resource "azurerm_virtual_network" "this" {
