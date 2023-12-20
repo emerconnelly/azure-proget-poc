@@ -42,14 +42,14 @@ resource "azurerm_subnet" "aks" {
   name                 = "aks"
   resource_group_name  = resource.azurerm_resource_group.azure_proget_poc.name
   virtual_network_name = resource.azurerm_virtual_network.this.name
-  address_prefixes     = ["10.0.0.0./24"]
+  address_prefixes     = ["10.0.0.0/24"]
 }
 
 resource "azurerm_subnet" "app_gateway" {
   name                 = "app-gateway"
   resource_group_name  = resource.azurerm_resource_group.azure_proget_poc.name
   virtual_network_name = resource.azurerm_virtual_network.this.name
-  address_prefixes     = ["10.0.1.0./24"]
+  address_prefixes     = ["10.0.1.0/24"]
 }
 
 # resource "azurerm_kubernetes_cluster" "azure_proget_poc" {
