@@ -80,7 +80,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     node_count          = 1
     os_disk_size_gb     = 32
     enable_auto_scaling = false
-    vnet_subnet_id      = resource.azurerm_subnet.aks.id
+    vnet_subnet_id      = resource.azurerm_subnet.aks_nodes.id
   }
   identity {
     type = "SystemAssigned"
