@@ -57,30 +57,51 @@ resource "azurerm_subnet" "app_gateway" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
-# resource "azurerm_kubernetes_cluster" "azure_proget_poc" {
-#   name                = "azure-proget-poc"
-#   resource_group_name = resource.azurerm_resource_group.azure_proget_poc.name
-#   location            = "centralus"
+import {
+  to = azurerm_kubernetes_cluster.azure_proget_poc
+  id = "/subscriptions/76546707-01b4-4754-b18f-c5cfd2a86be2/resourceGroups/azure-proget-poc/providers/Microsoft.ContainerService/managedClusters/aks"
+}
 
-#   dns_prefix                = "azure-proget-poc-dns"
-#   sku_tier                  = "Free"
-#   automatic_channel_upgrade = "patch"
+resource "azurerm_kubernetes_cluster" "azure_proget_poc" {
+  name                = "aks"
+  resource_group_name = "azure-proget-poc"
+  node_resource_group = "MC_azure-proget-poc_aks_centralus"
+  location            = "centralus"
 
-#   default_node_pool {
-#     name       = "agentpool"
-#     vm_size    = "Standard_DS2_v2"
-#     node_count = 1
-#   }
-
-#   identity {
-#     type = "SystemAssigned"
-#   }
-
-#   network_profile {
-#     network_plugin    = "kubenet"
-#     load_balancer_sku = "standard"
-#     network_policy    = "calico"
-#   }
-
-#   depends_on = [azurerm_resource_group.azure_proget_poc]
-# }
+  automatic_channel_upgrade           = "patch"
+  azure_policy_enabled                = false
+  custom_ca_trust_certificates_base64 = []
+  dns_prefix                          = "aks-dns"
+  http_application_routing_enabled    = false
+  kubernetes_version                  = "1.28.3"
+  role_based_access_control_enabled   = true
+  run_command_enabled                 = true
+  sku_tier                            = "Free"
+  support_plan                        = "KubernetesOfficial"
+  workload_identity_enabled           = false
+  default_node_pool {
+    name                 = "agentpool"
+    vm_size              = "Standard_DS2_v2"
+    node_count           = 1
+    orchestrator_version = "1.28.3"
+    os_sku               = "Ubuntu"
+    os_disk_type         = "Managed"
+    os_disk_size_gb      = 32
+    enable_auto_scaling  = false
+    # max_count            = 1
+    # min_count            = 1
+    vnet_subnet_id = resource.azurerm_subnet.aks.id
+  }
+  identity {
+    type = "SystemAssigned"
+  }
+  network_profile {
+    load_balancer_sku = "standard"
+    network_plugin    = "kubenet"
+    network_policy    = "calico"
+    outbound_type     = "loadBalancer"
+    pod_cidr          = "10.244.0.0/16"
+    service_cidr      = "172.16.0.0/16"
+    dns_service_ip    = "172.16.0.10"
+  }
+}
