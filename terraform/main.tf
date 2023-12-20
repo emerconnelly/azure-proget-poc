@@ -75,17 +75,12 @@ resource "azurerm_kubernetes_cluster" "azure_proget_poc" {
   support_plan                        = "KubernetesOfficial"
   workload_identity_enabled           = false
   default_node_pool {
-    name                 = "agentpool"
-    vm_size              = "Standard_DS2_v2"
-    node_count           = 1
-    orchestrator_version = "1.28.3"
-    os_sku               = "Ubuntu"
-    os_disk_type         = "Managed"
-    os_disk_size_gb      = 32
-    enable_auto_scaling  = false
-    # max_count            = 1
-    # min_count            = 1
-    vnet_subnet_id = resource.azurerm_subnet.aks.id
+    name                = "agentpool"
+    vm_size             = "Standard_DS2_v2"
+    node_count          = 1
+    os_disk_size_gb     = 32
+    enable_auto_scaling = false
+    vnet_subnet_id      = resource.azurerm_subnet.aks.id
   }
   identity {
     type = "SystemAssigned"
