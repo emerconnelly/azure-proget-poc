@@ -53,47 +53,47 @@ resource "azurerm_subnet" "app_gateway" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
-# resource "azurerm_kubernetes_cluster" "aks" {
-#   name                = "aks"
-#   resource_group_name = "azure-proget-poc"
-#   node_resource_group = "MC_azure-proget-poc_aks_centralus"
-#   location            = "centralus"
+resource "azurerm_kubernetes_cluster" "aks" {
+  name                = "aks"
+  resource_group_name = "azure-proget-poc"
+  node_resource_group = "MC_azure-proget-poc_aks_centralus"
+  location            = "centralus"
 
-#   automatic_channel_upgrade           = "patch"
-#   azure_policy_enabled                = false
-#   custom_ca_trust_certificates_base64 = []
-#   dns_prefix                          = "aks-dns"
-#   http_application_routing_enabled    = true
-#   kubernetes_version                  = "1.28.3"
-#   role_based_access_control_enabled   = true
-#   run_command_enabled                 = true
-#   sku_tier                            = "Free"
-#   support_plan                        = "KubernetesOfficial"
-#   workload_identity_enabled           = false
-#   default_node_pool {
-#     name                = "agentpool"
-#     vm_size             = "Standard_DS2_v2"
-#     node_count          = 1
-#     os_disk_size_gb     = 32
-#     enable_auto_scaling = false
-#     vnet_subnet_id      = resource.azurerm_subnet.aks_nodes.id
-#   }
-#   identity {
-#     type = "SystemAssigned"
-#   }
-#   network_profile {
-#     load_balancer_sku = "standard"
-#     network_plugin    = "kubenet"
-#     network_policy    = "calico"
-#     outbound_type     = "loadBalancer"
-#     pod_cidr          = "10.244.0.0/16"
-#     service_cidr      = "172.16.0.0/16"
-#     dns_service_ip    = "172.16.0.10"
-#   }
-# }
+  automatic_channel_upgrade           = "patch"
+  azure_policy_enabled                = false
+  custom_ca_trust_certificates_base64 = []
+  dns_prefix                          = "aks-dns"
+  http_application_routing_enabled    = true
+  kubernetes_version                  = "1.28.3"
+  role_based_access_control_enabled   = true
+  run_command_enabled                 = true
+  sku_tier                            = "Free"
+  support_plan                        = "KubernetesOfficial"
+  workload_identity_enabled           = false
+  default_node_pool {
+    name                = "agentpool"
+    vm_size             = "Standard_DS2_v2"
+    node_count          = 1
+    os_disk_size_gb     = 32
+    enable_auto_scaling = false
+    vnet_subnet_id      = resource.azurerm_subnet.aks_nodes.id
+  }
+  identity {
+    type = "SystemAssigned"
+  }
+  network_profile {
+    load_balancer_sku = "standard"
+    network_plugin    = "kubenet"
+    network_policy    = "calico"
+    outbound_type     = "loadBalancer"
+    pod_cidr          = "10.244.0.0/16"
+    service_cidr      = "172.16.0.0/16"
+    dns_service_ip    = "172.16.0.10"
+  }
+}
 
-# resource "azurerm_kubernetes_cluster_extension" "flux" {
-#   name           = "microsoft.flux"
-#   cluster_id     = resource.azurerm_kubernetes_cluster.aks.id
-#   extension_type = "microsoft.flux"
-# }
+resource "azurerm_kubernetes_cluster_extension" "flux" {
+  name           = "microsoft.flux"
+  cluster_id     = resource.azurerm_kubernetes_cluster.aks.id
+  extension_type = "microsoft.flux"
+}
