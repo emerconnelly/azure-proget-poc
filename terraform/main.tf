@@ -57,11 +57,6 @@ resource "azurerm_subnet" "app_gateway" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
-import {
-  to = azurerm_kubernetes_cluster.azure_proget_poc
-  id = "/subscriptions/76546707-01b4-4754-b18f-c5cfd2a86be2/resourceGroups/azure-proget-poc/providers/Microsoft.ContainerService/managedClusters/aks"
-}
-
 resource "azurerm_kubernetes_cluster" "azure_proget_poc" {
   name                = "aks"
   resource_group_name = "azure-proget-poc"
