@@ -43,7 +43,7 @@ resource "azurerm_virtual_network" "this" {
   address_space       = ["10.0.0.0/16"]
 }
 
-resource "azurerm_subnet" "aks" {
+resource "azurerm_subnet" "aks_nodes" {
   name                 = "aks"
   resource_group_name  = resource.azurerm_resource_group.this.name
   virtual_network_name = resource.azurerm_virtual_network.this.name
@@ -57,7 +57,7 @@ resource "azurerm_subnet" "app_gateway" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
-resource "azurerm_kubernetes_cluster" "azure_proget_poc" {
+resource "azurerm_kubernetes_cluster" "aks" {
   name                = "aks"
   resource_group_name = "azure-proget-poc"
   node_resource_group = "MC_azure-proget-poc_aks_centralus"
