@@ -3,11 +3,11 @@ resource "random_integer" "this" {
   max = 999999999999999
 }
 
-# resource "azurerm_resource_group" "this" {
-#   name = "azure-proget-poc"
+resource "azurerm_resource_group" "this" {
+  name = "azure-proget-poc"
 
-#   location = "centralus"
-# }
+  location = "centralus"
+}
 
 # resource "azurerm_storage_account" "this" {
 #   name = substr("progetpackages${resource.random_integer.this.result}}", 0, 24)
