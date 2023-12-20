@@ -63,7 +63,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   azure_policy_enabled                = false
   custom_ca_trust_certificates_base64 = []
   dns_prefix                          = "aks-dns"
-  http_application_routing_enabled    = false
+  http_application_routing_enabled    = true
   kubernetes_version                  = "1.28.3"
   role_based_access_control_enabled   = true
   run_command_enabled                 = true
