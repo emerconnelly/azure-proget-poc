@@ -79,8 +79,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vnet_subnet_id      = resource.azurerm_subnet.aks_nodes.id
   }
   service_principal {
-    client_id     = data.external.arm_client_id.result
-    client_secret = data.external.arm_client_secret.result
+    client_id     = keys(data.external.arm_client_id.result)[0]
+    client_secret = keys(data.external.arm_client_secret.result)[0]
   }
   network_profile {
     load_balancer_sku = "standard"
