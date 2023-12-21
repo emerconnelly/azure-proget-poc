@@ -93,8 +93,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 }
 
-# resource "azurerm_kubernetes_cluster_extension" "flux" {
-#   name           = "microsoft.flux"
-#   cluster_id     = resource.azurerm_kubernetes_cluster.aks.id
-#   extension_type = "microsoft.flux"
-# }
+resource "azurerm_kubernetes_cluster_extension" "flux" {
+  name           = "microsoft.flux"
+  cluster_id     = resource.azurerm_kubernetes_cluster.aks.id
+  extension_type = "microsoft.flux"
+}
