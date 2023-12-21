@@ -1,3 +1,3 @@
-# variable "ARM_CLIENT_ID" {}
+variable "arm_client_id" {}
 
-# variable "ARM_CLIENT_SECRET" {}
+variable "arm_client_secret" {}
