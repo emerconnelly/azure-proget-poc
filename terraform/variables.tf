@@ -1,9 +1,11 @@
 variable "ARM_CLIENT_ID" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "ARM_CLIENT_SECRET" {
-  type = string
+  type    = string
+  default = ""
 
   sensitive = true
 }
