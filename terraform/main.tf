@@ -77,6 +77,9 @@ resource "azurerm_kubernetes_cluster" "aks" {
     os_disk_size_gb     = 32
     enable_auto_scaling = false
     vnet_subnet_id      = resource.azurerm_subnet.aks_nodes.id
+    upgrade_settings {
+      max_surge       = "10%"
+    }
   }
   service_principal {
     client_id     = var.arm_client_id
@@ -93,8 +96,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 }
 
-resource "azurerm_kubernetes_cluster_extension" "flux" {
-  name           = "microsoft.flux"
-  cluster_id     = resource.azurerm_kubernetes_cluster.aks.id
-  extension_type = "microsoft.flux"
-}
+# resource "azurerm_kubernetes_cluster_extension" "flux" {
+#   name           = "microsoft.flux"
+#   cluster_id     = resource.azurerm_kubernetes_cluster.aks.id
+#   extension_type = "microsoft.flux"
+# }
