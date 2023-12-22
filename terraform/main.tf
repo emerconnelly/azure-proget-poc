@@ -59,7 +59,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   location            = "centralus"
 
   # automatic_channel_upgrade           = "patch"
-  # dns_prefix                          = "aks-dns"
+  dns_prefix                          = "aks-dns"
   # kubernetes_version                  = "1.28.3"
   sku_tier                            = "Free"
   # support_plan                        = "KubernetesOfficial"
