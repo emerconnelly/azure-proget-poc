@@ -56,23 +56,22 @@ resource "azurerm_subnet" "app_gateway" {
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = "aks"
   resource_group_name = "azure-proget-poc"
-  node_resource_group = "MC_azure-proget-poc_aks_centralus"
   location            = "centralus"
 
-  automatic_channel_upgrade           = "patch"
-  azure_policy_enabled                = false
-  custom_ca_trust_certificates_base64 = []
-  dns_prefix                          = "aks-dns"
-  http_application_routing_enabled    = true
-  kubernetes_version                  = "1.28.3"
-  role_based_access_control_enabled   = true
-  run_command_enabled                 = true
+  # automatic_channel_upgrade           = "patch"
+  # dns_prefix                          = "aks-dns"
+  # kubernetes_version                  = "1.28.3"
   sku_tier                            = "Free"
-  support_plan                        = "KubernetesOfficial"
-  workload_identity_enabled           = false
+  # support_plan                        = "KubernetesOfficial"
+  # azure_policy_enabled                = false
+  # http_application_routing_enabled    = true
+  # role_based_access_control_enabled   = true
+  # run_command_enabled                 = true
+  workload_identity_enabled           = true
+  oidc_issuer_enabled                 = true
   default_node_pool {
     name                = "agentpool"
-    vm_size             = "Standard_DS2_v2"
+    vm_size             = "Standard_B4s_v2" # "Standard_DS2_v2"
     node_count          = 1
     os_disk_size_gb     = 32
     enable_auto_scaling = false
