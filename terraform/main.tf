@@ -78,12 +78,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
     enable_auto_scaling = false
     vnet_subnet_id      = resource.azurerm_subnet.aks_nodes.id
     upgrade_settings {
-      max_surge       = "10%"
+      max_surge = "10%"
     }
   }
-  service_principal {
-    client_id     = var.arm_client_id
-    client_secret = var.arm_client_secret
+  identity {
+    type = "SystemAssigned"
   }
   network_profile {
     load_balancer_sku = "standard"
