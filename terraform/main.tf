@@ -124,7 +124,7 @@ resource "azurerm_kubernetes_flux_configuration" "alpine" {
 
   kustomizations {
     name                       = "alpine"
-    path                       = "./k8s-manifests/alpine"
+    path                       = "./k8s/alpine"
     garbage_collection_enabled = true
     recreating_enabled         = true
     sync_interval_in_seconds   = 60
