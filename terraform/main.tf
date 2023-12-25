@@ -102,5 +102,6 @@ resource "azurerm_kubernetes_cluster_extension" "flux" {
     "image-automation-controller.enabled" = true,
     "image-reflector-controller.enabled"  = true,
     "notification-controller.enabled"     = true,
+    "helm-controller.detectDrift"         = true,
   }
 }
