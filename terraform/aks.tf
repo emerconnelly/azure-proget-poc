@@ -14,6 +14,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
   # run_command_enabled                 = true
   workload_identity_enabled = true
   oidc_issuer_enabled       = true
+
+  key_vault_secrets_provider {
+    secret_rotation_enabled = true
+  }
+
   default_node_pool {
     name                = "default"
     vm_size             = "Standard_B4s_v2" # "Standard_DS2_v2"
@@ -25,9 +30,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
       max_surge = "10%"
     }
   }
+
   identity {
     type = "SystemAssigned"
   }
+
   network_profile {
     load_balancer_sku = "standard"
     network_plugin    = "kubenet"
