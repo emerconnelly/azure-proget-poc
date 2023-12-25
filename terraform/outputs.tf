@@ -6,7 +6,7 @@ output "kubeconfig" {
 }
 
 output "sql_connection_string" {
-  value       = "Server=tcp:${resource.azurerm_mssql_server.this.fully_qualified_domain_name},1433;Initial Catalog=${resource.azurerm_mssql_database.this.name};Persist Security Info=False;User ID=${resource.azurerm_mssql_database.this.administrator_login};Password=${resource.azurerm_mssql_database.this.administrator_login_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+  value       = "Server=tcp:${resource.azurerm_mssql_server.this.fully_qualified_domain_name},1433;Initial Catalog=${resource.azurerm_mssql_database.this.name};Persist Security Info=False;User ID=${resource.azurerm_mssql_server.this.administrator_login};Password=${resource.azurerm_mssql_server.this.administrator_login_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
   description = "Connection string for the Azure SQL Database created."
 
   sensitive = true
