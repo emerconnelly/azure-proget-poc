@@ -79,7 +79,7 @@ resource "azurerm_mssql_database" "this" {
 resource "azurerm_mssql_virtual_network_rule" "aks" {
   name      = "subnet-aks"
   server_id = resource.azurerm_mssql_server.this.id
-  subnet_id = resource.azurerm_subnet.aks.id
+  subnet_id = resource.azurerm_subnet.aks_nodes.id
 }
 
 resource "azurerm_kubernetes_cluster" "aks" {
