@@ -9,7 +9,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   sku_tier = "Free"
   # support_plan                        = "KubernetesOfficial"
   # azure_policy_enabled                = false
-  # http_application_routing_enabled    = true
   # role_based_access_control_enabled   = true
   # run_command_enabled                 = true
   workload_identity_enabled = true
