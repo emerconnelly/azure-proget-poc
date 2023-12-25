@@ -57,7 +57,7 @@ resource "azurerm_mssql_server" "this" {
   name                         = substr("proget-${resource.random_integer.this.result}}", 0, 24)
   resource_group_name          = resource.azurerm_resource_group.this.name
   location                     = resource.azurerm_resource_group.this.location
-  version                      = "16.0"
+  version                      = "12.0"
   administrator_login          = "missadministrator"
   administrator_login_password = "thisIsKat11"
   minimum_tls_version          = "1.2"
