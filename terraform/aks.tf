@@ -93,5 +93,8 @@ resource "azurerm_kubernetes_flux_configuration" "proget" {
     sync_interval_in_seconds   = 60
   }
 
-  depends_on = [resource.azurerm_mssql_server.this]
+  depends_on = [
+    resource.azurerm_kubernetes_cluster_extension.flux,
+    resource.azurerm_mssql_server.this,
+    ]
 }
