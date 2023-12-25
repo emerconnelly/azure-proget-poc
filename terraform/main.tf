@@ -59,18 +59,18 @@ resource "azurerm_kubernetes_cluster" "aks" {
   location            = "centralus"
 
   # automatic_channel_upgrade           = "patch"
-  dns_prefix                          = "aks-dns"
+  dns_prefix = "aks-dns"
   # kubernetes_version                  = "1.28.3"
-  sku_tier                            = "Free"
+  sku_tier = "Free"
   # support_plan                        = "KubernetesOfficial"
   # azure_policy_enabled                = false
   # http_application_routing_enabled    = true
   # role_based_access_control_enabled   = true
   # run_command_enabled                 = true
-  workload_identity_enabled           = true
-  oidc_issuer_enabled                 = true
+  workload_identity_enabled = true
+  oidc_issuer_enabled       = true
   default_node_pool {
-    name                = "agentpool"
+    name                = "default"
     vm_size             = "Standard_B4s_v2" # "Standard_DS2_v2"
     node_count          = 1
     os_disk_size_gb     = 32
