@@ -95,9 +95,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
 }
 
 resource "azurerm_kubernetes_cluster_extension" "flux" {
-  name           = "microsoft.flux"
-  cluster_id     = resource.azurerm_kubernetes_cluster.aks.id
-  extension_type = "microsoft.flux"
+  name              = "microsoft.flux"
+  cluster_id        = resource.azurerm_kubernetes_cluster.aks.id
+  extension_type    = "microsoft.flux"
+  release_namespace = "flux-system"
+
   configuration_settings = {
     "image-automation-controller.enabled" = true,
     "image-reflector-controller.enabled"  = true,
@@ -107,7 +109,7 @@ resource "azurerm_kubernetes_cluster_extension" "flux" {
 }
 
 resource "azurerm_kubernetes_flux_configuration" "alpine" {
-  name                              = alpine
+  name                              = "alpine"
   cluster_id                        = resource.azurerm_kubernetes_cluster.aks.id
   namespace                         = "flux-system"
   scope                             = "cluster"

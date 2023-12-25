@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: alpine
-  namespace: default
+  namespace: alpine
 spec:
   containers:
   - image: alpine:3.1
