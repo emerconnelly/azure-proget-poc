@@ -76,6 +76,12 @@ resource "azurerm_mssql_database" "this" {
   auto_pause_delay_in_minutes = 60
 }
 
+resource "azurerm_mssql_virtual_network_rule" "aks" {
+  name      = "subnet-aks"
+  server_id = resource.azurerm_mssql_server.this.id
+  subnet_id = resource.azurerm_subnet.aks.id
+}
+
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = "aks"
   resource_group_name = "azure-proget-poc"
