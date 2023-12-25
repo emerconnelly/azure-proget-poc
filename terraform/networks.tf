@@ -10,6 +10,8 @@ resource "azurerm_subnet" "aks_nodes" {
   resource_group_name  = resource.azurerm_resource_group.this.name
   virtual_network_name = resource.azurerm_virtual_network.this.name
   address_prefixes     = ["10.0.0.0/24"]
+
+  service_endpoints = ["Microsoft.Sql"]
 }
 
 resource "azurerm_subnet" "app_gateway" {
