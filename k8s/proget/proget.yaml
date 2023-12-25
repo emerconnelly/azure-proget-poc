@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: proget-sql-connection-string
+  namespace: proget
+  labels:
+    app.kubernetes.io/managed-by: manual
+    app.kubernetes.io/name: proget
+data:
+  PROGET_SQL_CONNECTION_STRING: 
+type: Opaque
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
