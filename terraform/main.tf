@@ -88,8 +88,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
     network_plugin    = "kubenet"
     network_policy    = "calico"
     outbound_type     = "loadBalancer"
-    pod_cidr          = "10.244.0.0/16"
-    service_cidr      = "172.16.0.0/16"
+    pod_cidr          = "10.244.0.0/16" # this is Azure's default setting
+    service_cidr      = "172.16.0.0/16" # using a different class helps differentiate from pods & nodes
     dns_service_ip    = "172.16.0.10"
   }
 }
@@ -111,8 +111,8 @@ resource "azurerm_kubernetes_cluster_extension" "flux" {
   }
 }
 
-resource "azurerm_kubernetes_flux_configuration" "alpine" {
-  name                              = "alpine"
+resource "azurerm_kubernetes_flux_configuration" "proget" {
+  name                              = "azure-proget-poc"
   cluster_id                        = resource.azurerm_kubernetes_cluster.aks.id
   namespace                         = "flux-system"
   scope                             = "cluster"
@@ -128,6 +128,14 @@ resource "azurerm_kubernetes_flux_configuration" "alpine" {
   kustomizations {
     name                       = "alpine"
     path                       = "./k8s/alpine"
+    garbage_collection_enabled = true
+    recreating_enabled         = true
+    sync_interval_in_seconds   = 60
+  }
+
+  kustomizations {
+    name                       = "proget"
+    path                       = "./k8s/proget"
     garbage_collection_enabled = true
     recreating_enabled         = true
     sync_interval_in_seconds   = 60
