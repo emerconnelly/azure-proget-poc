@@ -105,3 +105,26 @@ resource "azurerm_kubernetes_cluster_extension" "flux" {
     "helm-controller.detectDrift"         = true,
   }
 }
+
+resource "azurerm_kubernetes_flux_configuration" "alpine" {
+  name                              = alpine
+  cluster_id                        = resource.azurerm_kubernetes_cluster.aks.id
+  namespace                         = "flux-system"
+  scope                             = "cluster"
+  continuous_reconciliation_enabled = true
+
+  git_repository {
+    url                      = "https://github.com/emerconnelly/azure-proget-poc"
+    reference_type           = "branch"
+    reference_value          = "main"
+    sync_interval_in_seconds = 60
+  }
+
+  kustomizations {
+    name                       = "alpine"
+    path                       = "./k8s-manifests/alpine"
+    garbage_collection_enabled = true
+    recreating_enabled         = true
+    sync_interval_in_seconds   = 60
+  }
+}
