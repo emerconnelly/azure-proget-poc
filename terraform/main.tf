@@ -53,6 +53,16 @@ resource "azurerm_subnet" "app_gateway" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
+resource "azurerm_mssql_server" "this" {
+  name                         = substr("proget-${resource.random_integer.this.result}}", 0, 24)
+  resource_group_name          = resource.azurerm_resource_group.example.name
+  location                     = azurerm_resource_group.example.location
+  version                      = "16.0"
+  administrator_login          = "missadministrator"
+  administrator_login_password = "thisIsKat11"
+  minimum_tls_version          = "1.2"
+}
+
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = "aks"
   resource_group_name = "azure-proget-poc"
@@ -140,4 +150,6 @@ resource "azurerm_kubernetes_flux_configuration" "proget" {
     recreating_enabled         = true
     sync_interval_in_seconds   = 60
   }
+
+  depends_on = [ resource.azurerm_mssql_server.this ]
 }
