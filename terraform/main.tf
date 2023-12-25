@@ -101,10 +101,13 @@ resource "azurerm_kubernetes_cluster_extension" "flux" {
   release_namespace = "flux-system"
 
   configuration_settings = {
-    "image-automation-controller.enabled" = true,
-    "image-reflector-controller.enabled"  = true,
-    "notification-controller.enabled"     = true,
-    "helm-controller.detectDrift"         = true,
+    "image-automation-controller.enabled"              = true,
+    "image-reflector-controller.enabled"               = true,
+    "notification-controller.enabled"                  = true,
+    "helm-controller.detectDrift"                      = true,
+    "helm-controller.outOfMemoryWatch.enabled"         = true,
+    "helm-controller.outOfMemoryWatch.memoryThreshold" = 70,
+    "helm-controller.outOfMemoryWatch.interval"        = "700ms"
   }
 }
 
