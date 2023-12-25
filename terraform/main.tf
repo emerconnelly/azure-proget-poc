@@ -54,7 +54,7 @@ resource "azurerm_subnet" "app_gateway" {
 }
 
 resource "azurerm_mssql_server" "this" {
-  name                         = substr("proget-${resource.random_integer.this.result}}", 0, 24)
+  name                         = "proget-${resource.random_integer.this.result}"
   resource_group_name          = resource.azurerm_resource_group.this.name
   location                     = resource.azurerm_resource_group.this.location
   version                      = "12.0"
