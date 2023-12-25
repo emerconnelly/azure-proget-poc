@@ -98,4 +98,9 @@ resource "azurerm_kubernetes_cluster_extension" "flux" {
   name           = "microsoft.flux"
   cluster_id     = resource.azurerm_kubernetes_cluster.aks.id
   extension_type = "microsoft.flux"
+  configuration_settings = {
+    "image-automation-controller.enabled" = true,
+    "image-reflector-controller.enabled"  = true,
+    "notification-controller.enabled"     = true,
+  }
 }
