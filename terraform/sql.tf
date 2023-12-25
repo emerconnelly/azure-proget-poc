@@ -9,6 +9,12 @@ resource "azurerm_mssql_server" "this" {
   minimum_tls_version          = "1.2"
 }
 
+resource "azurerm_mssql_virtual_network_rule" "aks" {
+  name      = "subnet-aks"
+  server_id = resource.azurerm_mssql_server.this.id
+  subnet_id = resource.azurerm_subnet.aks_nodes.id
+}
+
 resource "azurerm_mssql_database" "this" {
   name = "proget"
 
@@ -19,10 +25,4 @@ resource "azurerm_mssql_database" "this" {
   max_size_gb                 = 5
   min_capacity                = 0.5
   auto_pause_delay_in_minutes = 60
-}
-
-resource "azurerm_mssql_virtual_network_rule" "aks" {
-  name      = "subnet-aks"
-  server_id = resource.azurerm_mssql_server.this.id
-  subnet_id = resource.azurerm_subnet.aks_nodes.id
 }
