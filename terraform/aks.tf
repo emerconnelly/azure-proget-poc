@@ -1,5 +1,5 @@
 resource "azurerm_kubernetes_cluster" "this" {
-  name                = "${azurerm_resource_group.this.name}-aks"
+  name                = "${azurerm_resource_group.this.name}"
   resource_group_name = azurerm_resource_group.this.name
   location            = azurerm_resource_group.this.location
 
