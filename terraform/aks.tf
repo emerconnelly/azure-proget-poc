@@ -75,11 +75,11 @@ resource "azurerm_kubernetes_cluster" "this" {
 }
 
 resource "azurerm_kubernetes_cluster_extension" "flux" {
-  name              = "microsoft.flux"
-  cluster_id        = azurerm_kubernetes_cluster.this.id
+  name       = "microsoft.flux"
+  cluster_id = azurerm_kubernetes_cluster.this.id
+
   extension_type    = "microsoft.flux"
   release_namespace = "flux-system"
-
   configuration_settings = {
     "image-automation-controller.enabled"              = true,
     "image-reflector-controller.enabled"               = true,
@@ -92,8 +92,9 @@ resource "azurerm_kubernetes_cluster_extension" "flux" {
 }
 
 resource "azurerm_kubernetes_flux_configuration" "proget" {
-  name                              = azurerm_resource_group.this.name
-  cluster_id                        = azurerm_kubernetes_cluster.aks.id
+  name       = azurerm_resource_group.this.name
+  cluster_id = azurerm_kubernetes_cluster.this.id
+
   namespace                         = "flux-system"
   scope                             = "cluster"
   continuous_reconciliation_enabled = true
