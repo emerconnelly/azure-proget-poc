@@ -1,5 +1,5 @@
 resource "azurerm_virtual_network" "this" {
-  name                = "azure-proget-poc-vnet"
+  name                = "${azurerm_resource_group.this.name}-vnet"
   resource_group_name = azurerm_resource_group.this.name
 
   location      = azurerm_resource_group.this.location
