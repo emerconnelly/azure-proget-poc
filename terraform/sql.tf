@@ -10,7 +10,8 @@ resource "azurerm_mssql_server" "this" {
 }
 
 resource "azurerm_mssql_virtual_network_rule" "aks" {
-  name      = "subnet-aks"
+  name = "subnet-aks"
+
   server_id = azurerm_mssql_server.this.id
   subnet_id = azurerm_subnet.aks_nodes.id
 }
