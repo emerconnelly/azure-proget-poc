@@ -76,7 +76,7 @@ resource "azurerm_kubernetes_cluster" "this" {
 
 resource "azurerm_kubernetes_cluster_extension" "flux" {
   name              = "microsoft.flux"
-  cluster_id        = azurerm_kubernetes_cluster.aks.id
+  cluster_id        = azurerm_kubernetes_cluster.this.id
   extension_type    = "microsoft.flux"
   release_namespace = "flux-system"
 

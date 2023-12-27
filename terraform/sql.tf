@@ -1,5 +1,5 @@
 resource "azurerm_mssql_server" "this" {
-  name                = substr("${azurerm_resource_group.this.name}-${random_id.this.result}", 0, 64)
+  name                = substr("${azurerm_resource_group.this.name}-${random_id.this.id}", 0, 64)
   resource_group_name = azurerm_resource_group.this.name
   location            = azurerm_resource_group.this.location
 
