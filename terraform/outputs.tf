@@ -6,7 +6,7 @@ output "csi_secret_store_identity" {
 }
 
 output "kubeconfig" {
-  value       = azurerm_kubernetes_cluster.aks.kube_config_raw
+  value       = azurerm_kubernetes_cluster.this.kube_config_raw
   description = "Kubeconfig for AKS cluster"
 
   sensitive = true
