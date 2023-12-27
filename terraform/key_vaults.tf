@@ -1,5 +1,5 @@
 resource "azurerm_key_vault" "this" {
-  name                = replace("${azurerm_resource_group.this.name}keyvault", "-", "")
+  name                = replace("${azurerm_resource_group.this.name}", "-", "")
   resource_group_name = azurerm_resource_group.this.name
   location            = azurerm_resource_group.this.location
 
@@ -8,4 +8,11 @@ resource "azurerm_key_vault" "this" {
   soft_delete_retention_days = 7
   purge_protection_enabled   = false
   enable_rbac_authorization  = true
+}
+
+resource "azurerm_key_vault_secret" "sql_connection_string" {
+  name         = "${azurerm_resource_group.this.name}-${output.sql_connection_string.name}"
+  key_vault_id = azurerm_key_vault.this.id
+
+  value = output.sql_connection_string.value
 }
