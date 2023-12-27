@@ -1,5 +1,5 @@
 resource "azurerm_mssql_server" "this" {
-  name                = "proget-${random_integer.this.result}"
+  name                = "proget-${random_id.this.result}"
   resource_group_name = azurerm_resource_group.this.name
   location            = azurerm_resource_group.this.location
 

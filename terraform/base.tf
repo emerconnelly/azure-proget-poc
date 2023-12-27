@@ -1,6 +1,5 @@
-resource "random_integer" "this" {
-  min = 100000000000000
-  max = 999999999999999
+resource "random_id" "this" {
+  byte_length = 8
 }
 
 resource "azurerm_resource_group" "this" {
