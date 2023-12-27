@@ -10,8 +10,8 @@ resource "azurerm_key_vault" "this" {
   enable_rbac_authorization  = true
 
   access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = data.azurerm_client_config.current.object_id
+    tenant_id = data.azurerm_client_config.this.tenant_id
+    object_id = data.azurerm_client_config.this.object_id
 
     key_permissions = [
       "Get",
