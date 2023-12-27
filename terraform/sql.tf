@@ -17,7 +17,7 @@ resource "azurerm_mssql_virtual_network_rule" "aks_nodes" {
 }
 
 resource "azurerm_mssql_database" "this" {
-  name = "proget"
+  name = azurerm_resource_group.this.name
 
   server_id                   = azurerm_mssql_server.this.id
   sku_name                    = "GP_S_Gen5_1"
