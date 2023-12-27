@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "this" {
-  name                = substr("progetpackages${random_id.this.dec}", 0, 24)
+  name                = substr("${replace(azurerm_resource_group.this.name, "-", "")}${random_id.this.dec}", 0, 24)
   resource_group_name = azurerm_resource_group.this.name
   location            = azurerm_resource_group.this.location
 
