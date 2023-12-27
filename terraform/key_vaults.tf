@@ -16,5 +16,5 @@ resource "azurerm_key_vault_secret" "sql_connection_string" {
   key_vault_id = azurerm_key_vault.this.id
   value        = local.sql_connection_string
 
-  depends_on = [ azurerm_role_assignment.key_vault_reader ]
+  depends_on = [ azurerm_role_assignment.tf_azure_rm ]
 }
