@@ -1,7 +1,7 @@
 # azure-proget-poc
 
-## terraform service principal requirements
-- terraform cloud environment variables
+## Terraform service principal requirements
+- Terraform Cloud environment variables
   - `ARM_CLIENT_ID`
   - `ARM_CLIENT_SECRET`
   - `ARM_SUBSCRIPTION_ID`
