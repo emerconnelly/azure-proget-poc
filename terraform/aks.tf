@@ -1,5 +1,5 @@
 resource "azurerm_key_vault" "this" {
-  name                = "${azurerm_resource_group.this.name}-keyvault"
+  name                = replace("${azurerm_resource_group.this.name}keyvault", "-", "")
   resource_group_name = azurerm_resource_group.this.name
   location            = azurerm_resource_group.this.location
 
