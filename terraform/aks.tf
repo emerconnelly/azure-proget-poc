@@ -1,18 +1,47 @@
-resource "azurerm_kubernetes_cluster" "aks" {
-  name                = "aks"
-  resource_group_name = "azure-proget-poc"
-  location            = resource.azurerm_resource_group.this.location
+resource "azurerm_key_vault" "this" {
+  name                = "${azurerm_resource_group.this.name}-keyvault"
+  resource_group_name = azurerm_resource_group.this.name
+  location            = azurerm_resource_group.this.location
 
+  tenant_id                  = data.azurerm_client_config.this.tenant_id
+  sku_name                   = "standard"
+  soft_delete_retention_days = 7
+  purge_protection_enabled   = false
+  enable_rbac_authorization  = true
+
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = data.azurerm_client_config.current.object_id
+
+    key_permissions = [
+      "Get",
+    ]
+
+    secret_permissions = [
+      "Get",
+    ]
+
+    storage_permissions = [
+      "Get",
+    ]
+  }
+}
+
+resource "azurerm_kubernetes_cluster" "this" {
+  name                = "${azurerm_resource_group.this.name}-aks"
+  resource_group_name = azurerm_resource_group.this.name
+  location            = azurerm_resource_group.this.location
+
+  kubernetes_version        = "1.28.3"
+  sku_tier                  = "Free"
+  dns_prefix                = "aks-dns"
+  workload_identity_enabled = true
+  oidc_issuer_enabled       = true
   # automatic_channel_upgrade           = "patch"
-  dns_prefix = "aks-dns"
-  # kubernetes_version                  = "1.28.3"
-  sku_tier = "Free"
   # support_plan                        = "KubernetesOfficial"
   # azure_policy_enabled                = false
   # role_based_access_control_enabled   = true
   # run_command_enabled                 = true
-  workload_identity_enabled = true
-  oidc_issuer_enabled       = true
 
   key_vault_secrets_provider {
     secret_rotation_enabled = true
@@ -24,7 +53,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     node_count          = 1
     os_disk_size_gb     = 32
     enable_auto_scaling = false
-    vnet_subnet_id      = resource.azurerm_subnet.aks_nodes.id
+    vnet_subnet_id      = azurerm_subnet.aks_nodes.id
     upgrade_settings {
       max_surge = "10%"
     }
@@ -47,7 +76,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
 resource "azurerm_kubernetes_cluster_extension" "flux" {
   name              = "microsoft.flux"
-  cluster_id        = resource.azurerm_kubernetes_cluster.aks.id
+  cluster_id        = azurerm_kubernetes_cluster.aks.id
   extension_type    = "microsoft.flux"
   release_namespace = "flux-system"
 
@@ -63,8 +92,8 @@ resource "azurerm_kubernetes_cluster_extension" "flux" {
 }
 
 resource "azurerm_kubernetes_flux_configuration" "proget" {
-  name                              = "azure-proget-poc"
-  cluster_id                        = resource.azurerm_kubernetes_cluster.aks.id
+  name                              = azurerm_resource_group.this.name
+  cluster_id                        = azurerm_kubernetes_cluster.aks.id
   namespace                         = "flux-system"
   scope                             = "cluster"
   continuous_reconciliation_enabled = true
@@ -93,7 +122,7 @@ resource "azurerm_kubernetes_flux_configuration" "proget" {
   }
 
   depends_on = [
-    resource.azurerm_kubernetes_cluster_extension.flux,
-    resource.azurerm_mssql_server.this,
-    ]
+    azurerm_kubernetes_cluster_extension.flux,
+    azurerm_mssql_server.this,
+  ]
 }
