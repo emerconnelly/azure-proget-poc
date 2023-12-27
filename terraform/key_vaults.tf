@@ -11,8 +11,8 @@ resource "azurerm_key_vault" "this" {
 }
 
 resource "azurerm_key_vault_secret" "sql_connection_string" {
-  name         = "${azurerm_resource_group.this.name}-${output.sql_connection_string.name}"
+  name         = "${azurerm_resource_group.this.name}-sql-connection-string"
   key_vault_id = azurerm_key_vault.this.id
 
-  value = output.sql_connection_string.value
+  value = local.sql_connection_string
 }
