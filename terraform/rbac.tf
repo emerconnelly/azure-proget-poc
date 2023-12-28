@@ -28,6 +28,6 @@ resource "azurerm_federated_identity_credential" "aks_csi_driver_proget" {
 
   audience  = ["api://AzureADTokenExchange"]
   issuer    = azurerm_kubernetes_cluster.this.oidc_issuer_url
-  parent_id = azurerm_kubernetes_cluster.this.key_vault_secrets_provider[0].secret_identity[0].client_id
+  parent_id = azurerm_kubernetes_cluster.this.key_vault_secrets_provider[0].secret_identity[0].user_assigned_identity_id
   subject   = "system:serviceaccount:proget:workload-identity-sa"
 }
