@@ -1,15 +1,3 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: proget-sql-connection-string
-  namespace: proget
-  labels:
-    app.kubernetes.io/managed-by: manual
-    app.kubernetes.io/name: proget
-data:
-  PROGET_SQL_CONNECTION_STRING: 
-type: Opaque
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,6 +17,7 @@ spec:
       labels:
         app.kubernetes.io/managed-by: manual
         app.kubernetes.io/name: proget
+        azure.workload.identity/use: "true"
     spec:
       containers:
       - name: proget
@@ -78,7 +67,7 @@ spec:
                 values:
                 - proget
             topologyKey: kubernetes.io/hostname
-      schedulerName: default-scheduler
+      serviceAccountName: "workload-identity-sa"
   strategy:
     type: RollingUpdate
     rollingUpdate:
