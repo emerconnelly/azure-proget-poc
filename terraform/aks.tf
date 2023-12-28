@@ -97,6 +97,6 @@ resource "azurerm_kubernetes_flux_configuration" "proget" {
     azurerm_kubernetes_cluster_extension.flux,
     azurerm_mssql_database.this,
     azurerm_storage_container.this,
-    azurerm_role_assignment.aks_csi_driver_proget,
+    azurerm_federated_identity_credential.aks_csi_driver_proget
   ]
 }
