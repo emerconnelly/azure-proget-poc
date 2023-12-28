@@ -95,6 +95,6 @@ resource "azurerm_kubernetes_flux_configuration" "proget" {
 
   depends_on = [
     azurerm_kubernetes_cluster_extension.flux,
-    azurerm_mssql_server.this,
+    azurerm_mssql_database.this,
   ]
 }
