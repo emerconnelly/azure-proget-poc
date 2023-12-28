@@ -45,6 +45,12 @@ resource "azurerm_kubernetes_cluster" "this" {
   }
 }
 
+resource "azuread_service_principal" "this" {
+  client_id                    = azurerm_kubernetes_cluster.this.key_vault_secrets_provider[0].client_id
+  app_role_assignment_required = false
+  owners                       = [data.azuread_client_config.this.object_id]
+}
+
 resource "azurerm_kubernetes_cluster_extension" "flux" {
   name       = "microsoft.flux"
   cluster_id = azurerm_kubernetes_cluster.this.id
@@ -96,5 +102,6 @@ resource "azurerm_kubernetes_flux_configuration" "proget" {
   depends_on = [
     azurerm_kubernetes_cluster_extension.flux,
     azurerm_mssql_database.this,
+    azurerm_storage_container.this,
   ]
 }
