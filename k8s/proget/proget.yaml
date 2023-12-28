@@ -67,7 +67,7 @@ spec:
                 values:
                 - proget
             topologyKey: kubernetes.io/hostname
-      serviceAccountName: "workload-identity-sa"
+      serviceAccountName: workload-identity-sa
   strategy:
     type: RollingUpdate
     rollingUpdate:
