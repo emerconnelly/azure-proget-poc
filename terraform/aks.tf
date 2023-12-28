@@ -1,5 +1,5 @@
 resource "azurerm_kubernetes_cluster" "this" {
-  name                = "${azurerm_resource_group.this.name}"
+  name                = azurerm_resource_group.this.name
   resource_group_name = azurerm_resource_group.this.name
   location            = azurerm_resource_group.this.location
 
@@ -43,12 +43,6 @@ resource "azurerm_kubernetes_cluster" "this" {
     service_cidr      = "172.16.0.0/16" # using a different class helps differentiate from pods & nodes
     dns_service_ip    = "172.16.0.10"
   }
-}
-
-resource "azuread_service_principal" "this" {
-  client_id                    = azurerm_kubernetes_cluster.this.key_vault_secrets_provider[0].secret_identity[0].client_id
-  app_role_assignment_required = false
-  owners                       = [data.azurerm_client_config.this.object_id]
 }
 
 resource "azurerm_kubernetes_cluster_extension" "flux" {
@@ -103,5 +97,6 @@ resource "azurerm_kubernetes_flux_configuration" "proget" {
     azurerm_kubernetes_cluster_extension.flux,
     azurerm_mssql_database.this,
     azurerm_storage_container.this,
+    azurerm_role_assignment.aks_csi_driver_managed_identity,
   ]
 }
