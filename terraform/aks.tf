@@ -48,7 +48,7 @@ resource "azurerm_kubernetes_cluster" "this" {
 resource "azuread_service_principal" "this" {
   client_id                    = azurerm_kubernetes_cluster.this.key_vault_secrets_provider[0].client_id
   app_role_assignment_required = false
-  owners                       = [data.azuread_client_config.this.object_id]
+  owners                       = [data.azurerm_client_config.this.object_id]
 }
 
 resource "azurerm_kubernetes_cluster_extension" "flux" {
