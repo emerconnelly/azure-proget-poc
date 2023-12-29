@@ -8,6 +8,8 @@ resource "azurerm_key_vault" "this" {
   soft_delete_retention_days = 7
   purge_protection_enabled   = false
   enable_rbac_authorization  = true
+
+  depends_on = [ azurerm_role_assignment.tf_azurerm ]
 }
 
 resource "azurerm_key_vault_secret" "sql_connection_string" {
@@ -15,6 +17,4 @@ resource "azurerm_key_vault_secret" "sql_connection_string" {
 
   key_vault_id = azurerm_key_vault.this.id
   value        = local.sql_connection_string
-
-  depends_on = [ azurerm_role_assignment.tf_azurerm ]
 }
