@@ -55,6 +55,10 @@ spec:
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: secrets-store01-inline
+          mountPath: "/mnt/secrets-store"
+          readOnly: true
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
@@ -70,6 +74,13 @@ spec:
                 - proget
             topologyKey: kubernetes.io/hostname
       serviceAccountName: workload-identity-sa
+      volumes:
+      - name: secrets-store01-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "azure-proget-poc-wi"
   strategy:
     type: RollingUpdate
     rollingUpdate:
