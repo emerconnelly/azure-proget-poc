@@ -30,10 +30,10 @@ spec:
         env:
         - name: ASPNETCORE_URLS
           value: http://*:80
-        - name: SECRET_USERNAME
+        - name: PROGET_SQL_CONNECTION_STRING
           valueFrom:
             secretKeyRef:
-              name: PROGET_SQL_CONNECTION_STRING
+              name: azure-proget-poc-sql-connection-string
               key: azure-proget-poc-sql-connection-string
         resources:
           limits:
