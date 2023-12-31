@@ -62,7 +62,6 @@ spec:
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
-      securityContext: {}
       volumes:
       - name: secrets-store01-inline
         csi:
