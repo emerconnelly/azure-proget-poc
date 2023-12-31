@@ -12,7 +12,7 @@ resource "azurerm_key_vault" "this" {
   network_acls {
     bypass         = "AzureServices"
     default_action = "Deny"
-    virtual_network_subnet_ids = azurerm_subnet.aks_nodes.id
+    virtual_network_subnet_ids = azurerm_subnet.aks_nodes[*].id
   }
 }
 
