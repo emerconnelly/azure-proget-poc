@@ -8,7 +8,6 @@ resource "azurerm_kubernetes_cluster" "this" {
   dns_prefix                = "aks-dns"
   workload_identity_enabled = true
   oidc_issuer_enabled       = true
-  private_dns_zone_id       = "System"
   # automatic_channel_upgrade           = "patch"
   # support_plan                        = "KubernetesOfficial"
   # azure_policy_enabled                = false
@@ -45,9 +44,9 @@ resource "azurerm_kubernetes_cluster" "this" {
   #   dns_zone_id = 
   # }
 
-  # ingress_application_gateway {
-  #   subnet_id = azurerm_subnet.app_gateway.id
-  # }
+  ingress_application_gateway {
+    subnet_id = azurerm_subnet.app_gateway.id
+  }
 
   key_vault_secrets_provider {
     secret_rotation_enabled = true
