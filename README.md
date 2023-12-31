@@ -1,3 +1,5 @@
+[![Terraform Apply](https://github.com/emerconnelly/aks-proget-poc/actions/workflows/terraform-apply.yml/badge.svg?branch=main)](https://github.com/emerconnelly/aks-proget-poc/actions/workflows/terraform-apply.yml)
+
 # aks-proget-poc
 
 ## Terraform service principal requirements
