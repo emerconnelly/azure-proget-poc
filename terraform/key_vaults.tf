@@ -25,3 +25,12 @@ resource "azurerm_key_vault_secret" "sql_connection_string" {
 
   depends_on = [azurerm_role_assignment.tf_azurerm]
 }
+
+resource "azurerm_key_vault_secret" "kubeconfig" {
+  name = "kubeconfig"
+
+  key_vault_id = azurerm_key_vault.this.id
+  value        = azurerm_kubernetes_cluster.this.kube_config_raw
+
+  depends_on = [azurerm_role_assignment.tf_azurerm]
+}
