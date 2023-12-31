@@ -3,7 +3,7 @@ terraform {
     organization = "emerconnelly"
 
     workspaces {
-      name = "azure-proget-poc"
+      name = "aks-proget-poc"
     }
   }
 }

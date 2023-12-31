@@ -8,7 +8,7 @@ on:
 env:
   TF_CLOUD_ORGANIZATION: "emerconnelly"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
-  TF_WORKSPACE: "azure-proget-poc"
+  TF_WORKSPACE: "aks-proget-poc"
   CONFIG_DIRECTORY: "terraform/"
 
 jobs:

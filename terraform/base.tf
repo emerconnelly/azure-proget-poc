@@ -3,7 +3,7 @@ resource "random_id" "this" {
 }
 
 resource "azurerm_resource_group" "this" {
-  name = "azure-proget-poc"
+  name = "aks-proget-poc"
 
   location = "centralus"
 }

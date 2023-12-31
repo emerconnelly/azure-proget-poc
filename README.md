@@ -1,4 +1,4 @@
-# azure-proget-poc
+# aks-proget-poc
 
 ## Terraform service principal requirements
 - Terraform Cloud environment variables

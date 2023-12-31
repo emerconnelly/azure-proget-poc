@@ -71,7 +71,7 @@ resource "azurerm_kubernetes_flux_configuration" "proget" {
   continuous_reconciliation_enabled = true
 
   git_repository {
-    url                      = "https://github.com/emerconnelly/azure-proget-poc"
+    url                      = "https://github.com/emerconnelly/aks-proget-poc"
     reference_type           = "branch"
     reference_value          = "main"
     sync_interval_in_seconds = 60
