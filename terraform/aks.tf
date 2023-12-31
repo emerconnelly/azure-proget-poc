@@ -8,11 +8,6 @@ resource "azurerm_kubernetes_cluster" "this" {
   dns_prefix                = "aks-dns"
   workload_identity_enabled = true
   oidc_issuer_enabled       = true
-  # automatic_channel_upgrade           = "patch"
-  # support_plan                        = "KubernetesOfficial"
-  # azure_policy_enabled                = false
-  # role_based_access_control_enabled   = true
-  # run_command_enabled                 = true
 
   default_node_pool {
     name                = "default"
