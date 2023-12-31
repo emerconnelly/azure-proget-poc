@@ -12,8 +12,8 @@ resource "azurerm_key_vault" "this" {
   network_acls {
     bypass                     = "AzureServices"
     default_action             = "Deny"
-    ip_rules                   = toset(chomp(data.http.tf_execution_ip.body))
-    virtual_network_subnet_ids = toset(azurerm_subnet.aks_nodes.id)
+    ip_rules                   = toset([chomp(data.http.tf_execution_ip.body)])
+    virtual_network_subnet_ids = toset([azurerm_subnet.aks_nodes.id])
   }
 }
 
