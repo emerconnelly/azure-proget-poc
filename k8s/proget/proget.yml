@@ -63,7 +63,6 @@ spec:
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
       securityContext: {}
-      serviceAccountName: workload-identity-sa
       volumes:
       - name: secrets-store01-inline
         csi:
