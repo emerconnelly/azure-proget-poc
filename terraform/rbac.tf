@@ -1,16 +1,18 @@
+# allow the Terraform execution identity to create secrets in the key vault
 resource "azurerm_role_assignment" "tf_azurerm" {
   scope              = azurerm_key_vault.this.id
   role_definition_id = data.azurerm_role_definition.key_vault_administrator.id
   principal_id       = data.azurerm_client_config.this.object_id
 }
 
-# grant key vault admin role to the auto-create aks csi driver identity
+# allow the AKS secret store csi driver identity to use the key vault
 resource "azurerm_role_assignment" "aks_secrets_store_csi_driver_identity" {
   scope              = azurerm_key_vault.this.id
   role_definition_id = data.azurerm_role_definition.key_vault_administrator.id
   principal_id       = azurerm_kubernetes_cluster.this.key_vault_secrets_provider[0].secret_identity[0].object_id
 }
 
+# allow the AGIC identity to use the "app-gateway" subnet since it's in a different resource group than the managed AKS resources
 resource "azurerm_role_assignment" "aks_application_gateway_ingress_controller_identity" {
   scope              = azurerm_subnet.app_gateway.id
   role_definition_id = data.azurerm_role_definition.network_contributor.id
