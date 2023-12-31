@@ -8,15 +8,12 @@ resource "azurerm_kubernetes_cluster" "this" {
   dns_prefix                = "aks-dns"
   workload_identity_enabled = true
   oidc_issuer_enabled       = true
+  private_dns_zone_id       = "System"
   # automatic_channel_upgrade           = "patch"
   # support_plan                        = "KubernetesOfficial"
   # azure_policy_enabled                = false
   # role_based_access_control_enabled   = true
   # run_command_enabled                 = true
-
-  key_vault_secrets_provider {
-    secret_rotation_enabled = true
-  }
 
   default_node_pool {
     name                = "default"
@@ -42,6 +39,18 @@ resource "azurerm_kubernetes_cluster" "this" {
     pod_cidr          = "10.244.0.0/16" # this is Azure's default setting
     service_cidr      = "172.16.0.0/16" # using a different class helps differentiate from pods & nodes
     dns_service_ip    = "172.16.0.10"
+  }
+
+  # web_app_routing {
+  #   dns_zone_id = 
+  # }
+
+  # ingress_application_gateway {
+  #   subnet_id = azurerm_subnet.app_gateway.id
+  # }
+
+  key_vault_secrets_provider {
+    secret_rotation_enabled = true
   }
 }
 
