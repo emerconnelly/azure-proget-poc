@@ -40,10 +40,13 @@ resource "azurerm_kubernetes_cluster" "this" {
     dns_service_ip    = "172.16.0.10"
   }
 
+  # https://learn.microsoft.com/en-us/azure/aks/app-routing?tabs=default%2Cdeploy-app-default
   # web_app_routing {
   #   dns_zone_id = 
   # }
 
+  # https://learn.microsoft.com/en-us/azure/application-gateway/tutorial-ingress-controller-add-on-new
+  
   ingress_application_gateway {
     subnet_id = azurerm_subnet.app_gateway.id
   }
