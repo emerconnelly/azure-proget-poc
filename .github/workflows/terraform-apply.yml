@@ -43,3 +43,21 @@ jobs:
       with:
         run: ${{ steps.apply-run.outputs.run_id }}
         comment: "Apply Run from GitHub Actions CI ${{ github.sha }}"
+    
+    - name: Show run
+      uses: hashicorp/tfc-workflows-github/actions/show-run@v1.1.1
+      id: show-run
+      with:
+        run: ${{ steps.apply-run.outputs.run_id }}
+    
+    - run: |
+        echo "${{ steps.show-run.outputs }}"
+
+  secrets-store-csi-driver:
+    name: "Secrets Store CSI Driver Config"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
