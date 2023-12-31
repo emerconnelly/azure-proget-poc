@@ -75,6 +75,7 @@ resource "azurerm_kubernetes_flux_configuration" "proget" {
     reference_type           = "branch"
     reference_value          = "main"
     sync_interval_in_seconds = 60
+    timeout_in_seconds       = 60
   }
 
   kustomizations {
@@ -82,7 +83,9 @@ resource "azurerm_kubernetes_flux_configuration" "proget" {
     path                       = "./k8s/alpine"
     garbage_collection_enabled = true
     recreating_enabled         = true
+    retry_interval_in_seconds  = 60
     sync_interval_in_seconds   = 60
+    timeout_in_seconds         = 60
   }
 
   kustomizations {
@@ -90,7 +93,9 @@ resource "azurerm_kubernetes_flux_configuration" "proget" {
     path                       = "./k8s/proget"
     garbage_collection_enabled = true
     recreating_enabled         = true
+    timeout_in_seconds         = 60
     sync_interval_in_seconds   = 60
+    retry_interval_in_seconds  = 60
   }
 
   depends_on = [
