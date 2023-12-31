@@ -9,12 +9,12 @@ resource "azurerm_key_vault" "this" {
   purge_protection_enabled   = false
   enable_rbac_authorization  = true
 
-  network_acls {
-    bypass                     = "AzureServices"
-    default_action             = "Deny"
-    ip_rules                   = toset([chomp(data.http.tf_execution_ip.body)])
-    virtual_network_subnet_ids = toset([azurerm_subnet.aks_nodes.id])
-  }
+  # network_acls {
+  #   bypass                     = "AzureServices"
+  #   default_action             = "Deny"
+  #   ip_rules                   = toset([chomp(data.http.tf_execution_ip.body)])
+  #   virtual_network_subnet_ids = toset([azurerm_subnet.aks_nodes.id])
+  # }
 }
 
 resource "azurerm_key_vault_secret" "sql_connection_string" {
