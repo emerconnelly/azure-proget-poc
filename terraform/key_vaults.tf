@@ -10,9 +10,10 @@ resource "azurerm_key_vault" "this" {
   enable_rbac_authorization  = true
 
   network_acls {
-    bypass         = "AzureServices"
-    default_action = "Deny"
-    virtual_network_subnet_ids = azurerm_subnet.aks_nodes[*].id
+    bypass                     = "AzureServices"
+    default_action             = "Deny"
+    ip_rules                   = toset(chomp(data.http.tf_execution_ip.body))
+    virtual_network_subnet_ids = toset(azurerm_subnet.aks_nodes.id)
   }
 }
 
@@ -22,5 +23,8 @@ resource "azurerm_key_vault_secret" "sql_connection_string" {
   key_vault_id = azurerm_key_vault.this.id
   value        = local.sql_connection_string
 
-  depends_on = [azurerm_role_assignment.tf_azurerm]
+  depends_on = [
+    azurerm_role_assignment.tf_azurerm,
+    azurerm_key_vault.this,
+  ]
 }
