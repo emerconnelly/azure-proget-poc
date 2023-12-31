@@ -8,6 +8,11 @@ resource "azurerm_key_vault" "this" {
   soft_delete_retention_days = 7
   purge_protection_enabled   = false
   enable_rbac_authorization  = true
+
+  network_acls {
+    bypass         = "AzureServices"
+    default_action = "Deny"
+  }
 }
 
 resource "azurerm_key_vault_secret" "sql_connection_string" {
