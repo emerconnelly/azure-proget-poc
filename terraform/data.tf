@@ -8,7 +8,8 @@ data "azurerm_role_definition" "key_vault_administrator" {
 }
 
 data "azurerm_role_definition" "network_contributor" {
-  name = "Network Contributor"
+  name  = "Network Contributor"
+  scope = azurerm_subnet.app_gateway.id
 }
 
 # data "http" "tf_execution_ip" {
