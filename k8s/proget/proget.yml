@@ -34,7 +34,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: aks-proget-poc-sql-connection-string
-              key: aks-proget-poc-sql-connection-string
+              key: PROGET_SQL_CONNECTION_STRING
         resources:
           limits:
             cpu: '1'
