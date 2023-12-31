@@ -69,7 +69,7 @@ spec:
           driver: secrets-store.csi.k8s.io
           readOnly: true
           volumeAttributes:
-            secretProviderClass: aks-proget-poc-wi
+            secretProviderClass: aks-proget-poc-msi
   strategy:
     type: RollingUpdate
     rollingUpdate:
