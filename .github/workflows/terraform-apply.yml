@@ -46,7 +46,7 @@ jobs:
       id: workspace-output
       with:
         workspace: ${{ env.TF_WORKSPACE }}
-    - run: echo ${{ steps.workspace-output.outputs.outputs }}
+    - run: echo ${{ steps.workspace-output.outputs.outputs.outputs }}
 
   secrets-store-csi-driver:
     name: "Apply SecretsProviderClass Manifest"
