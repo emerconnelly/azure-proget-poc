@@ -46,7 +46,7 @@ jobs:
       id: workspace-output
       with:
         workspace: ${{ env.TF_WORKSPACE }}
-    - run: echo ${{ steps.workspace-output.outputs }}
+    - run: echo ${{ steps.workspace-output.outputs.outputs }}
 
   secrets-store-csi-driver:
     name: "Apply SecretsProviderClass Manifest"
@@ -67,7 +67,7 @@ jobs:
         azcliversion: latest
         inlineScript: |
           az keyvault secret download --vault-name aksprogetpoc --name kubeconfig --file kubeconfig.yml
-    - run: ${{ needs.terraform.outputs }}
+    - run: ${{ needs.terraform.outputs.terraform-outputs }}
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
       with:
