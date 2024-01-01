@@ -67,6 +67,7 @@ jobs:
         inlineScript: |
           az keyvault secret download --vault-name aksprogetpoc --name kubeconfig --file kubeconfig.yml
     - run: cat kubeconfig.yml
+    - run: echo ${{ needs.terraform.outputs.terraform-outputs }}
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
       with:
