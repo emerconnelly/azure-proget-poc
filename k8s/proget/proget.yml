@@ -54,7 +54,7 @@ spec:
           failureThreshold: 3
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         volumeMounts:
         - name: secrets-store01-inline
           mountPath: /mnt/secrets-store
