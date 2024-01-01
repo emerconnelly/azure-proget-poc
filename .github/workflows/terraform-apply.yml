@@ -1,4 +1,4 @@
-name: "Terraform Apply"
+name: "Deploy"
 
 on:
   push:
@@ -48,19 +48,8 @@ jobs:
       with:
         workspace: ${{ env.TF_WORKSPACE }}
 
-  azure-cli:
-    name: "Azure CLI"
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    needs: terraform
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
-
   secrets-store-csi-driver:
-    name: "Secrets Store CSI Driver Config"
+    name: "Apply SecretsProviderClass Manifest"
     runs-on: ubuntu-latest
     permissions:
       contents: read
