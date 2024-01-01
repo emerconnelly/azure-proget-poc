@@ -30,6 +30,6 @@ output "aks_identity_tenant_id" {
 }
 
 output "aks_key_vault_identity_client_id" {
-  value       = azurerm_kubernetes_cluster.this.key_vault_secrets_provider[0].secret_identity[0].object_id
+  value       = azurerm_kubernetes_cluster.this.key_vault_secrets_provider[0].secret_identity[0].client_id
   description = "Client ID of the Azure AD identity created for the AKS cluster."
 }
