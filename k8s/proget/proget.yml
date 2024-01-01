@@ -37,11 +37,11 @@ spec:
               key: PROGET_SQL_CONNECTION_STRING
         resources:
           limits:
-            cpu: '1'
+            cpu: 1000m
             memory: 1000Mi
           requests:
-            cpu: '1'
-            memory: 1000Mi
+            cpu: 100m
+            memory: 100Mi
         livenessProbe:
           httpGet:
             path: /health
