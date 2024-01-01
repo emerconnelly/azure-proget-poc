@@ -47,7 +47,7 @@ resource "azurerm_kubernetes_cluster" "this" {
 
   key_vault_secrets_provider {
     # https://learn.microsoft.com/en-us/azure/aks/csi-secrets-store-driver
-    secret_rotation_enabled = true
+    secret_rotation_interval = "1m"
   }
 }
 
