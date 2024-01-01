@@ -77,7 +77,7 @@ jobs:
       with:
         azcliversion: latest
         inlineScript: |
-          az keyvault secret show --vault-name YourKeyVaultName --name YourSecretName --query value > kubeconfig.yaml
+          az keyvault secret show --vault-name azure-proget-poc --name azure-proget-poc --query value > kubeconfig.yaml
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
       with:
