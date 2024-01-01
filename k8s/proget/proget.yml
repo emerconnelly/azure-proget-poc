@@ -1,3 +1,4 @@
+# deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -75,11 +76,14 @@ spec:
       maxUnavailable: 1
       maxSurge: 2
   progressDeadlineSeconds: 600
+
 ---
+
+# service
 apiVersion: v1
 kind: Service
 metadata:
-  name: proget-service
+  name: proget
   namespace: proget
   labels:
     app.kubernetes.io/managed-by: manual
@@ -105,3 +109,26 @@ spec:
   - IPv4
   ipFamilyPolicy: SingleStack
   internalTrafficPolicy: Cluster
+
+---
+
+# ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: proget
+  namespace: proget
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+spec:
+  ingressClassName: azure-application-gateway
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          service:
+            name: proget
+            port:
+              number: 80
+        pathType: Exact
