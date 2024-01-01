@@ -18,3 +18,18 @@ output "sql_connection_string" {
 
   sensitive = true
 }
+
+output "key_vault_name" {
+  value       = azurerm_key_vault.this.name
+  description = "Name of the Azure Key Vault created."
+}
+
+output "aks_identity_tenant_id" {
+  value       = azurerm_kubernetes_cluster.this.identity[0].tenant_id
+  description = "Tenant ID of the Azure AD identity created for the AKS cluster."
+}
+
+output "aks_key_vault_identity_client_id" {
+  value       = azurerm_kubernetes_cluster.this.key_vault_secrets_provider[0].secret_identity[0].object_id
+  description = "Client ID of the Azure AD identity created for the AKS cluster."
+}
