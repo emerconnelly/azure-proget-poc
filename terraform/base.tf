@@ -5,5 +5,5 @@ resource "random_id" "this" {
 resource "azurerm_resource_group" "this" {
   name = "aks-proget-poc"
 
-  location = "centralus"
+  location = "eastus"
 }
