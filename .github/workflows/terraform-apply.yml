@@ -73,6 +73,6 @@ jobs:
         version: latest
     - name: Apply YAML to AKS Cluster
       run: |
-        kubectl get pods--kubeconfig=kubeconfig.yaml
+        kubectl get pods
       env:
         KUBECONFIG: kubeconfig.yaml
