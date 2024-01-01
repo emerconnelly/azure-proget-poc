@@ -56,6 +56,13 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+    - name: Set Env Vars from Terraform Outputs
+      run: |
+        for element in $(echo '${{ needs.terraform.outputs.terraform-outputs }}' | jq -r '.[] | @base64'); do
+          name=$(echo "$element" | base64 -d | jq -r '.name' | tr '[:lower:]' '[:upper:]')
+          value=$(echo "$element" | base64 -d | jq -r '.value')
+          echo "$name=$value" >> $GITHUB_ENV
+        done
     - name: Azure CLI Login
       uses: azure/login@v1
       with:
@@ -66,14 +73,6 @@ jobs:
         azcliversion: latest
         inlineScript: |
           az keyvault secret download --vault-name aksprogetpoc --name kubeconfig --file kubeconfig.yml
-    - name: Set Env Vars from Terraform Outputs
-      run: |
-        for element in $(echo '${{ needs.terraform.outputs.terraform-outputs }}' | jq -r '.[] | @base64'); do
-          name=$(echo "$element" | base64 -d | jq -r '.name' | tr '[:lower:]' '[:upper:]')
-          value=$(echo "$element" | base64 -d | jq -r '.value')
-
-          echo "$name=$value" >> $GITHUB_ENV
-        done
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
       with:
