@@ -46,19 +46,6 @@ jobs:
       id: workspace-output
       with:
         workspace: ${{ env.TF_WORKSPACE }}
-    - run: echo '${{ steps.workspace-output.outputs.outputs }}' | jq .
-    - name: Set Outputs
-      id: set-outputs
-      run: |
-        for element in $(echo '${{ steps.workspace-output.outputs.outputs }}' | jq -r '.[] | @base64'); do
-          name=$(echo "$element" | base64 -d | jq -r '.name' | tr '[:lower:]' '[:upper:]')
-          value=$(echo "$element" | base64 -d | jq -r '.value')
-
-          echo "$name=$value" >> $GITHUB_ENV
-        done
-    - name: Test Env Var
-      run: |
-        echo $AKS_IDENTITY_TENANT_ID
 
   secrets-store-csi-driver:
     name: "SecretsProviderClass Manifest Apply"
@@ -73,15 +60,13 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - name: Set KUBECONFIG
+    - name: Download kubeconfig.yaml
       uses: azure/CLI@v1
       with:
         azcliversion: latest
         inlineScript: |
           az keyvault secret download --vault-name aksprogetpoc --name kubeconfig --file kubeconfig.yml
-    - run: echo '${{ needs.terraform.outputs.terraform-outputs }}' | jq .
-    - name: Set Outputs
-      id: set-outputs
+    - name: Set Env Vars from Terraform Outputs
       run: |
         for element in $(echo '${{ needs.terraform.outputs.terraform-outputs }}' | jq -r '.[] | @base64'); do
           name=$(echo "$element" | base64 -d | jq -r '.name' | tr '[:lower:]' '[:upper:]')
@@ -89,15 +74,12 @@ jobs:
 
           echo "$name=$value" >> $GITHUB_ENV
         done
-    - name: Test Env Var
-      run: |
-        echo $AKS_IDENTITY_TENANT_ID
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
       with:
         version: latest
-    - name: Apply YAML to AKS Cluster
+    - name: Apply YAML Manifest
       run: |
-        kubectl get nodes
+        envsubst < k8s/secrets-store-csi-driver/proget-secret-provider-class.yml | kubectl apply -f -
       env:
         KUBECONFIG: kubeconfig.yml
