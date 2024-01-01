@@ -23,21 +23,18 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-
     - name: Upload Configuration
       uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.1.1
       id: upload-configuration
       with:
         workspace: ${{ env.TF_WORKSPACE }}
         directory: ${{ env.CONFIG_DIRECTORY }}
-
     - name: Create Run
       uses: hashicorp/tfc-workflows-github/actions/create-run@v1.1.1
       id: create-run
       with:
         workspace: ${{ env.TF_WORKSPACE }}
         configuration_version: ${{ steps.upload-configuration.outputs.configuration_version_id }}
-
     - name: Apply Run
       uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.1.1
       if: fromJSON(steps.create-run.outputs.payload).data.attributes.actions.IsConfirmable
@@ -45,19 +42,38 @@ jobs:
       with:
         run: ${{ steps.create-run.outputs.run_id }}
         comment: "Apply Run from GitHub Actions CI ${{ github.sha }}"
-
     - name: Workspace Output
       uses: hashicorp/tfc-workflows-github/actions/workspace-output@v1.1.1
       id: workspace-output
       with:
         workspace: ${{ env.TF_WORKSPACE }}
 
+  azure-cli:
+    name: "Azure CLI"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    needs: terraform
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Azure CLI script
+      uses: azure/CLI@v1
+      with:
+        azcliversion: latest
+        inlineScript: |
+          az account shows
+
   secrets-store-csi-driver:
     name: "Secrets Store CSI Driver Config"
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    needs: terraform
+    needs: [terraform, azure-cli]
     steps:
     - name: Checkout
       uses: actions/checkout@v4
