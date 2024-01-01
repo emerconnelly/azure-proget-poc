@@ -57,23 +57,35 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - name: Azure CLI script
-      uses: azure/CLI@v1
-      with:
-        azcliversion: latest
-        inlineScript: |
-          az account show
+
 
   secrets-store-csi-driver:
     name: "Secrets Store CSI Driver Config"
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    needs: [terraform, azure-cli]
+    needs: [terraform]
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+    - name: Azure CLI Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Set KUBECONFIG
+      uses: azure/CLI@v1
+      with:
+        azcliversion: latest
+        inlineScript: |
+          kubeconfig=$(az keyvault secret show --name "kubeconfig" --vault-name "aksprogetpoc" --query "value")
+          echo KUBECONFIG=$kubeconfig >> $GITHUB_ENV
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: latest
+    - name: kubectl - get pods
+      uses: actions-hub/kubectl@master
+      env:
+        KUBE_CONFIG: ${{ env.KUBECONFIG }}
+      with:
+        args: get pods
