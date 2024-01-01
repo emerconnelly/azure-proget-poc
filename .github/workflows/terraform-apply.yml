@@ -72,16 +72,16 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - name: Download kubeconfig.yaml
+    - name: Set KUBECONFIG
       uses: azure/CLI@v1
       with:
         azcliversion: latest
         inlineScript: |
-          az keyvault secret download --vault-name aks-proget-poc --name kubeconfig --file kubeconfig.yaml
+          az keyvault secret show --vault-name YourKeyVaultName --name YourSecretName --query value > kubeconfig.yaml
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
       with:
         version: latest
-    - name: Use Kubeconfig to Apply YAML to AKS Cluster
+    - name: Apply YAML to AKS Cluster
       run: |
-        kubectl --kubeconfig=kubeconfig.yaml get pods
+        kubectl get pods--kubeconfig=kubeconfig.yaml
