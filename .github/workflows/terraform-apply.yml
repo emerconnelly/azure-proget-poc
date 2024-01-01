@@ -46,6 +46,8 @@ jobs:
       id: workspace-output
       with:
         workspace: ${{ env.TF_WORKSPACE }}
+    - name: Install `jq`
+      run: sudo apt-get update && sudo apt-get install jq -y
     - run: ${{ steps.workspace-output.outputs.outputs }} | jq .
 
   secrets-store-csi-driver:
