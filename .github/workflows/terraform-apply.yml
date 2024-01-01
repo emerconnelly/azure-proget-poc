@@ -46,7 +46,7 @@ jobs:
       id: workspace-output
       with:
         workspace: ${{ env.TF_WORKSPACE }}
-    - run: echo ${{ steps.workspace-output.outputs.outputs }} | jq -r '.[] | "export \(.name)=\(.value)"' >> $GITHUB_ENV
+    - run: echo ${{ steps.workspace-output.outputs.status }}
 
   secrets-store-csi-driver:
     name: "Apply SecretsProviderClass Manifest"
