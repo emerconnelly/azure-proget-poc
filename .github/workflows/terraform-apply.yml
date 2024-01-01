@@ -48,7 +48,7 @@ jobs:
         workspace: ${{ env.TF_WORKSPACE }}
     - name: Install `jq`
       run: sudo apt-get update && sudo apt-get install jq -y
-    - run: ${{ steps.workspace-output.outputs.outputs }} | jq .
+    - run: echo '${{ steps.workspace-output.outputs.outputs }}' | jq .
 
   secrets-store-csi-driver:
     name: "Apply SecretsProviderClass Manifest"
@@ -69,7 +69,7 @@ jobs:
         azcliversion: latest
         inlineScript: |
           az keyvault secret download --vault-name aksprogetpoc --name kubeconfig --file kubeconfig.yml
-    - run: ${{ needs.terraform.outputs.terraform-outputs }}
+    - run: echo '${{ needs.terraform.outputs.terraform-outputs }}' | jq .
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
       with:
