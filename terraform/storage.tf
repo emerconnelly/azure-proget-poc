@@ -7,6 +7,10 @@ resource "azurerm_storage_account" "this" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
   access_tier              = "Cool"
+
+  blob_properties {
+    last_access_time_enabled = true
+  }
 }
 
 resource "azurerm_storage_container" "this" {
