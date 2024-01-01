@@ -37,10 +37,10 @@ spec:
               key: PROGET_SQL_CONNECTION_STRING
         resources:
           limits:
-            cpu: 1000m
+            cpu: '1'
             memory: 1000Mi
           requests:
-            cpu: 1000m
+            cpu: '1'
             memory: 1000Mi
         livenessProbe:
           httpGet:
