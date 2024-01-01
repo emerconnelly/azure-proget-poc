@@ -65,14 +65,14 @@ jobs:
       with:
         azcliversion: latest
         inlineScript: |
-          az keyvault secret download --vault-name aksprogetpoc --name kubeconfig --file kubeconfig.yaml
-    - run: cat kubeconfig.yaml
+          az keyvault secret download --vault-name aksprogetpoc --name kubeconfig --file kubeconfig.yml
+    - run: cat kubeconfig.yml
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
       with:
         version: latest
     - name: Apply YAML to AKS Cluster
       run: |
-        kubectl get pods
+        kubectl get nodes
       env:
-        KUBECONFIG: kubeconfig.yaml
+        KUBECONFIG: kubeconfig.yml
