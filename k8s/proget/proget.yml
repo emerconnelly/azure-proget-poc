@@ -33,7 +33,7 @@ spec:
         - name: PROGET_SQL_CONNECTION_STRING
           valueFrom:
             secretKeyRef:
-              name: aks-proget-poc-sql-connection-string
+              name: sql-connection-string
               key: PROGET_SQL_CONNECTION_STRING
         resources:
           limits:
