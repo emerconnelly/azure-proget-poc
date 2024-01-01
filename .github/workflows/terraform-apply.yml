@@ -48,7 +48,7 @@ jobs:
         workspace: ${{ env.TF_WORKSPACE }}
 
   secrets-store-csi-driver:
-    name: "SecretsProviderClass Manifest Apply"
+    name: "SecretsProviderClass Manifest"
     runs-on: ubuntu-latest
     permissions:
       contents: read
