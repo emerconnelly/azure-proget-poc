@@ -47,6 +47,18 @@ jobs:
       with:
         workspace: ${{ env.TF_WORKSPACE }}
     - run: echo '${{ steps.workspace-output.outputs.outputs }}' | jq .
+    - name: Set Outputs
+      id: set-outputs
+      run: |
+        for element in $(echo '${{ steps.workspace-output.outputs.outputs }}' | jq -r '.[] | @base64'); do
+          name=$(echo "$element" | base64 -d | jq -r '.name' | tr '[:lower:]' '[:upper:]')
+          value=$(echo "$element" | base64 -d | jq -r '.value')
+
+          echo "$name=$value" >> $GITHUB_ENV
+        done
+    - name: Test Env Var
+      run: |
+        echo $AKS_IDENTITY_TENANT_ID
 
   secrets-store-csi-driver:
     name: "SecretsProviderClass Manifest Apply"
