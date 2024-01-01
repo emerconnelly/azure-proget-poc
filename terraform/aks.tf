@@ -9,6 +9,7 @@ resource "azurerm_kubernetes_cluster" "this" {
   workload_identity_enabled = true
   oidc_issuer_enabled       = true
 
+
   default_node_pool {
     name                = "default"
     vm_size             = "Standard_B2pls_v2" # "Standard_DS2_v2"
@@ -16,6 +17,8 @@ resource "azurerm_kubernetes_cluster" "this" {
     os_disk_size_gb     = 32
     enable_auto_scaling = false
     vnet_subnet_id      = azurerm_subnet.aks_nodes.id
+    temporary_name_for_rotation = "temp"
+
     upgrade_settings {
       max_surge = "10%"
     }
