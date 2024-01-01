@@ -11,12 +11,12 @@ resource "azurerm_kubernetes_cluster" "this" {
 
 
   default_node_pool {
-    name                = "default"
-    vm_size             = "Standard_B2pls_v2" # "Standard_DS2_v2"
-    node_count          = 1
-    os_disk_size_gb     = 32
-    enable_auto_scaling = false
-    vnet_subnet_id      = azurerm_subnet.aks_nodes.id
+    name                        = "default"
+    vm_size                     = "Standard_B2pls_v2" # "Standard_DS2_v2"
+    node_count                  = 1
+    os_disk_size_gb             = 32
+    enable_auto_scaling         = false
+    vnet_subnet_id              = azurerm_subnet.aks_nodes.id
     temporary_name_for_rotation = "temp"
 
     upgrade_settings {
@@ -85,16 +85,6 @@ resource "azurerm_kubernetes_flux_configuration" "proget" {
     reference_value          = "main"
     sync_interval_in_seconds = 60
     timeout_in_seconds       = 60
-  }
-
-  kustomizations {
-    name                       = "alpine"
-    path                       = "./k8s/alpine"
-    garbage_collection_enabled = true
-    recreating_enabled         = true
-    retry_interval_in_seconds  = 60
-    sync_interval_in_seconds   = 60
-    timeout_in_seconds         = 60
   }
 
   kustomizations {
