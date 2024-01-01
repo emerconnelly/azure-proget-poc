@@ -17,7 +17,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     os_disk_size_gb             = 32
     enable_auto_scaling         = false
     vnet_subnet_id              = azurerm_subnet.aks_nodes.id
-    temporary_name_for_rotation = "temp"
+    temporary_name_for_rotation = "default-temp"
 
     upgrade_settings {
       max_surge = "10%"
