@@ -49,7 +49,7 @@ jobs:
     - run: echo '${{ steps.workspace-output.outputs.outputs }}' | jq .
 
   secrets-store-csi-driver:
-    name: "Apply SecretsProviderClass Manifest"
+    name: "SecretsProviderClass Manifest Apply"
     runs-on: ubuntu-latest
     permissions:
       contents: read
