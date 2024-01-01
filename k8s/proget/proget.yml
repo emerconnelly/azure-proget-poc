@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: proget
-        image: proget.inedo.com/productimages/inedo/proget:23.0.23
+        image: proget.inedo.com/productimages/inedo/proget:23.0.24
         ports:
         - containerPort: 80
           protocol: TCP
