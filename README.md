@@ -6,14 +6,14 @@ Automated deployment of a public ProGet instance on AKS & Azure SQL using GitHub
 ## how to use
 
 - Fork this repository and configure the requirements below.
-- This creates two new resource groups in the provided subscription, containing all the resources.
-  - one for the
+- This creates two new resource groups in the provided subscription.
+  - one for:
     - VNet
     - key vault
     - SQL server & database
     - storage account & containers
     - AKS cluster
-  - one for the AKS managed resources
+  - another for the AKS managed resources
 - Once deployed, access ProGet by locating the ingress public IP in the new resource group.
 
 ### environment variables
