@@ -10,6 +10,7 @@
   - `ARM_TENANT_ID`
 - GitHub environment variables
   - `AZURE_CREDENTIALS`
+  - `TF_API_TOKEN`
 - Azure RBAC roles for the Terraform executor identity
   - Contributor (scope = subscription)
   - Role Based Access Administrator (scope = subscription)
