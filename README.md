@@ -3,21 +3,21 @@
 # aks-proget-poc
 Fully automated provisioning of a publicly available ProGet instance on a single-node AKS cluster & Azure SQL database using GitHub Actions, Terraform Cloud, & Secrets Store CSI Driver.
 
-### how to use
+## how to use
 
-#### environment variables
+### environment variables
 
-##### Terraform Cloud
+#### Terraform Cloud
 - `ARM_CLIENT_ID`
 - `ARM_CLIENT_SECRET`
 - `ARM_SUBSCRIPTION_ID`
 - `ARM_TENANT_ID`
 
-##### GitHub secrets
+#### GitHub secrets
 - `AZURE_CREDENTIALS`
 - `TF_API_TOKEN`
 
-#### Azure service principal for Terraform AzureRM
+### Azure service principal for Terraform AzureRM
 - Azure RBAC roles
   - Contributor (scope = subscription)
   - Role Based Access Administrator (scope = subscription)
