@@ -5,6 +5,10 @@ Automated deployment of a public ProGet instance on AKS & Azure SQL using GitHub
 
 ## how to use
 
+Fork this repository and configure the requirements below.
+This creates a new resource group in the provided subscription which contains all created resources.
+Once created, access ProGet by locating the ingress public IP in the new resource group.
+
 ### environment variables
 
 - GitHub secrets
