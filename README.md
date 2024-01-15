@@ -8,7 +8,7 @@ Automated deployment of a public ProGet instance on AKS & Azure SQL using GitHub
 ### environment variables
 
 - GitHub secrets
-  - `AZURE_CREDENTIALS`
+  - `AZURE_CREDENTIALS` ([see here](https://github.com/marketplace/actions/azure-login#login-with-a-service-principal-secret))
   - `TF_API_TOKEN`
 - Terraform Cloud
   - `ARM_CLIENT_ID`
