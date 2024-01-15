@@ -7,17 +7,15 @@ Automated deployment of a public ProGet instance on AKS & Azure SQL using GitHub
 
 ### environment variables
 
-#### Terraform Cloud
-- `ARM_CLIENT_ID`
-- `ARM_CLIENT_SECRET`
-- `ARM_SUBSCRIPTION_ID`
-- `ARM_TENANT_ID`
+- GitHub secrets
+  - `AZURE_CREDENTIALS`
+  - `TF_API_TOKEN`
+- Terraform Cloud
+  - `ARM_CLIENT_ID`
+  - `ARM_CLIENT_SECRET`
+  - `ARM_SUBSCRIPTION_ID`
+  - `ARM_TENANT_ID`
 
-#### GitHub secrets
-- `AZURE_CREDENTIALS`
-- `TF_API_TOKEN`
-
-### Azure service principal for Terraform AzureRM
-- Azure RBAC roles
-  - Contributor (scope = subscription)
-  - Role Based Access Administrator (scope = subscription)
+### Azure Service Principal  for Terraform AzureRM
+- Contributor (scope subscription)
+- Role Based Access Administrator (scope subscription)
