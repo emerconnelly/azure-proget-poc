@@ -8,6 +8,8 @@
   - `ARM_CLIENT_SECRET`
   - `ARM_SUBSCRIPTION_ID`
   - `ARM_TENANT_ID`
-- Azure RBAC roles (scope: subscription)
-  - Contributor
-  - Role Based Access Administrator
+- GitHub environment variables
+  - `AZURE_CREDENTIALS`
+- Azure RBAC roles for the Terraform executor identity
+  - Contributor (scope = subscription)
+  - Role Based Access Administrator (scope = subscription)
