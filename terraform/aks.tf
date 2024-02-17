@@ -13,6 +13,8 @@ resource "azurerm_kubernetes_cluster" "this" {
     name                        = "default"
     vm_size                     = "Standard_B2ls_v2" # "Standard_DS2_v2"
     node_count                  = 1
+    os_sku                      = "AzureLinux"
+    os_disk_type                = "Ephemeral"
     os_disk_size_gb             = 32
     enable_auto_scaling         = false
     vnet_subnet_id              = azurerm_subnet.aks_nodes.id
