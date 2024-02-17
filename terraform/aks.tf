@@ -11,7 +11,7 @@ resource "azurerm_kubernetes_cluster" "this" {
 
   default_node_pool {
     name                        = "default"
-    vm_size                     = "Standard_D2lds_v5"
+    vm_size                     = "Standard_D2a_v4"
     node_count                  = 1
     os_sku                      = "AzureLinux"
     os_disk_type                = "Ephemeral"
