@@ -4,7 +4,7 @@
 
 Automated deployment of a public ProGet instance on AKS & Azure SQL using GitHub Actions, Terraform Cloud, & Secrets Store CSI Driver.
 
-``` HCL
+``` Terraform
 terraform {
   required_version = ">= 1.6.6"
 
