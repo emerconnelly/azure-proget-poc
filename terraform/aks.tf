@@ -4,18 +4,18 @@ resource "azurerm_kubernetes_cluster" "this" {
   location            = azurerm_resource_group.this.location
 
   kubernetes_version        = "1.28.3"
-  dns_prefix                = "aks-dns"
+  dns_prefix                = resource_group.this.name
   sku_tier                  = "Free"
   workload_identity_enabled = true
   oidc_issuer_enabled       = true
 
   default_node_pool {
     name                        = "default"
-    vm_size                     = "Standard_B2ls_v2" # "Standard_DS2_v2"
+    vm_size                     = "Standard_D2lds_v5"
     node_count                  = 1
     os_sku                      = "AzureLinux"
     os_disk_type                = "Ephemeral"
-    os_disk_size_gb             = 32
+    os_disk_size_gb             = 30
     enable_auto_scaling         = false
     vnet_subnet_id              = azurerm_subnet.aks_nodes.id
     temporary_name_for_rotation = "temp"
