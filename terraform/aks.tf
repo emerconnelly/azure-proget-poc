@@ -16,7 +16,6 @@ resource "azurerm_kubernetes_cluster" "this" {
     os_sku                      = "AzureLinux"
     os_disk_type                = "Ephemeral"
     os_disk_size_gb             = 30
-    enable_auto_scaling         = false
     vnet_subnet_id              = azurerm_subnet.aks_nodes.id
     temporary_name_for_rotation = "temp"
 
