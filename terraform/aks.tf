@@ -4,10 +4,10 @@ resource "azurerm_kubernetes_cluster" "this" {
   location            = azurerm_resource_group.this.location
 
   kubernetes_version        = "1.28.3"
+  dns_prefix                = "aks-dns"
   sku_tier                  = "Free"
   workload_identity_enabled = true
   oidc_issuer_enabled       = true
-
 
   default_node_pool {
     name                        = "default"
