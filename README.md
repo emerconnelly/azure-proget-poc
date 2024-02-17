@@ -1,7 +1,8 @@
 # aks-proget-poc
-Automated deployment of a public ProGet instance on AKS & Azure SQL using GitHub Actions, Terraform Cloud, & Secrets Store CSI Driver.
 
 [![Terraform Apply](https://github.com/emerconnelly/aks-proget-poc/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/emerconnelly/aks-proget-poc/actions/workflows/deploy.yml)
+
+Automated deployment of a public ProGet instance on AKS & Azure SQL using GitHub Actions, Terraform Cloud, & Secrets Store CSI Driver.
 
 ## how to use
 
