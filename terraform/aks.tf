@@ -5,7 +5,6 @@ resource "azurerm_kubernetes_cluster" "this" {
 
   kubernetes_version        = "1.28.3"
   sku_tier                  = "Free"
-  dns_prefix                = "aks-dns"
   workload_identity_enabled = true
   oidc_issuer_enabled       = true
 
